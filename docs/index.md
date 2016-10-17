@@ -1,6 +1,6 @@
 # Welcome to Flask-Restaction
 
-Flask-Restaction A web framwork born to create RESTful API
+A web framwork born to create RESTful API
 
 - Create RESTful API
 - Validate request and Serialize response
