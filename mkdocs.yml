@@ -1,5 +1,7 @@
 site_name: RestAction
 pages:
   - Home: index.md
+  - Quickstart: quickstart.md
+  - resjs: resjs.md
+  - Schema: schema.md
 repo_url: 'https://github.com/guyskk/flask-restaction'
-
