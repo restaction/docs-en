@@ -1,66 +1,69 @@
-# YAML与Schema语法
+# YAML and Schema syntax
 
-JSON的语法是YAML语法的子集，因此大部分的JSON文件都可以被YAML的解析器解析。
-由于YAML的运作主要依赖缩进来决定结构，且字符串不需要双引号，写出的Schema会更加精简，更适合写在文档字符串中。
+JSON is a subset of YAML, so most JSON data can be parsed by YAML parser.
 
-[Validr](https://github.com/guyskk/validr)中使用JSON格式表示Schema，
-框架中则用的是YAML，是为了适合不同的使用环境。
+Since YAML use indent to control data struct, and needn't quote strings,
+it's more suitable for writing schema in doc string.
 
-学习Schema语法需要先学会基本的JSON和YAML语法，YAML语法比JSON语法略复杂一些，可以通过 [YAML 语言教程](http://www.ruanyifeng.com/blog/2016/07/yaml.html)对YAML语法进行初步了解。
+[Validr](https://github.com/guyskk/validr) use JSON to represent schema, but
+this web framework use YAML for fitting different scene.
 
-之后可以看一下Validr中的[Schema语法](https://github.com/guyskk/validr/blob/master/Isomorph-JSON-Schema-zh-cn.md)，
-Schema语法是基于JSON的，并且与实际数据结构相同，很容易掌握。
+To learn schema syntax, you should learn basic JSON and YAML syntax first.
+See http://json.org/ ,http://yaml.org/ and http://pyyaml.org/.
 
-然后再转换到YAML格式的Schema，新手学习过程中可能会遇到一些问题，
-这里总结了一些与Schema相关的语法，方便上手。
+Then you can learn [schema syntax](https://github.com/guyskk/validr/blob/master/Isomorph-JSON-Schema.md)
+in Validr, it is easy to be master of.
 
-
-## YAML解析器
-
-YAML中有一些特殊符号，`@` 是YAML的保留符号，`&` 用于表示 [锚](http://pyyaml.org/wiki/PyYAMLDocumentation#Aliases)，
-这两个与Schema语法有冲突，框架对YAML解析器进行了修改，将 `@`，`&` 视为普通字符串，同时不再支持YAML的锚语法。
+Finally, migrate from JSON to YAML, beginers may encounter some problems, 
+I summarized some problems for easy to start.
 
 
-## 列表
+## YAML parser
 
-注意: `'-'` 后面要有一个空格或换行。
+There are some special chars in YAML, eg: `@`,`&`,`*`. `&` is used for [Anchors](http://pyyaml.org/wiki/PyYAMLDocumentation#Aliases) but it almost won't
+used in schema. Those chars are conflict with schema syntax, so I modified
+YAML parser, treat `@`, `&` as plain text and disable Anchor syntax of YAML.
 
-简单的列表:
+## list
+
+Note: `'-'` should followed with a space or new line.
+
+simple list:
 
     # tags
     - &unique&minlen=1
     - str
 
-嵌套的列表:
+nested list:
 
     # time_table
-    # 星期一
-    - - 上午写BUG
-      - 下午改BUG
-      - 晚上又写BUG
-    # 星期二
-    - - 上午改昨天的BUG
-      - 下午又写一堆BUG
-      - 晚上改不完的BUG
+    # Monday
+    - - morning write BUG
+      - afternoon fix BUG
+      - evening write BUG
+    # Tuesday
+    - - morning fix BUG
+      - afternoon write BUG
+      - evening fix BUG
     # ...
 
     # schema_of_time_table
-    - &minlen=7&maxlen=7 # 一周七天
-    - - &minlen=3&maxlen=3 # 每天有三个时间段
-      - str&optional # 这个时间段的安排
+    - &minlen=7&maxlen=7 # 7 days a week
+    - - &minlen=3&maxlen=3 # 3 period per day
+      - str&optional # todos
 
 
-## 字典
+## dict
 
-注意: `':'` 后面要有一个空格或换行。
+Note: `':'` should followed with a space or new line.
 
-简单的字典:
+simple dict:
 
     user:
         id?int: user id
         name?str: user name
 
-嵌套的字典:
+nested dict:
 
     friends:
         best:
@@ -77,9 +80,9 @@ YAML中有一些特殊符号，`@` 是YAML的保留符号，`&` 用于表示 [�
         bad@user: bad friend
 
 
-## 复杂的嵌套
+## complicated nested
 
-列表里面是字典:
+dict in list:
 
     - my friends
     - id?int: user id
@@ -88,7 +91,7 @@ YAML中有一些特殊符号，`@` 是YAML的保留符号，`&` 用于表示 [�
     - my friends
     - @user
 
-字典里面有列表:
+list in dict:
 
     friends:
         - my friends
@@ -100,7 +103,7 @@ YAML中有一些特殊符号，`@` 是YAML的保留符号，`&` 用于表示 [�
         - @user
 
 
-## 引用
+## refer
 
     $shared:
         userid: int
@@ -111,7 +114,7 @@ YAML中有一些特殊符号，`@` 是YAML的保留符号，`&` 用于表示 [�
             id?int: user id
             name?str: user name
 
-下面的可以引用上面的:
+refer to the back of the front:
 
     $shared:
         userid: int
@@ -119,13 +122,13 @@ YAML中有一些特殊符号，`@` 是YAML的保留符号，`&` 用于表示 [�
             id@userid: user id
             name?str: user name
 
-## 混合
+## mixin
 
     $shared:
         paging:
-            page_num?int&min=1&default=1: 第几页
-            page_size?int&min=1&default=10: 每页的数量
+            page_num?int&min=1&default=1: page number
+            page_size?int&min=1&default=10: page size
         query:
-            $self@paging: 查询参数
-            tag?str: 标签
-            date?date: 日期
+            $self@paging: query params
+            tag?str: tag
+            date?date: date
