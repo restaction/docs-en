@@ -1,13 +1,13 @@
 # resjs
 
-res.js是对AJAX的封装，用res.js调用API非常简单，回调是Promise风格的。
+res.js is a AJAX lib used for call API in a easy way.
 
-## 生成res.js
+## Generate res.js
 
-可以用flask-restaction提供的命令行工具或者 https://www.npmjs.com/package/resjs
-生成res.js，两个用法一样，生成的代码也是完全一样的。
+Use cli provided by flask-restaction or https://www.npmjs.com/package/resjs
+can generate res.js, they has the same usage and generate the same code.
 
-用法:
+Usage:
 
     usage: resjs [-h] [-d DEST] [-p PREFIX] [-n] [-m] url
 
@@ -23,36 +23,36 @@ res.js是对AJAX的封装，用res.js调用API非常简单，回调是Promise风
       -n, --node                  generate res.js for nodejs, default for browser
       -m, --min                   minimize generated res.js, default not minimize
 
-例如:
+Example:
 
     resjs http://127.0.0.1:5000 -d static/res.js
 
 
-## res.js的用法
+## Usage of res.js
 
-HTTP请求使用的是 [SuperAgent][SuperAgent]，Promise使用的是
-[babel-plugin-transform-runtime](https://babeljs.io/docs/plugins/transform-runtime)。
+res.js use [SuperAgent][SuperAgent] to send HTTP requests, and use [babel-plugin-transform-runtime](https://babeljs.io/docs/plugins/transform-runtime)
+to polyfill Promise.
 
-发出请求时会自动添加 auth token(Authorization) 请求头,
-收到响应后会自动将响应头中的 auth token(Authorization) 储存在浏览器 localStorage 中。
+It will add  auth token(Authorization) to request headers, and save
+auth token(Authorization) from response headers to localStorage of browser.
 
-使用res.js:
+Usage:
 
-    // 模块加载方式(UMD)
+    //by module loader(UMD)
     var res = require('./res.js');
 
-    //或引用 res.js 文件
+    //by script tag
     <script type="text/javascript" src="/static/res.js"></script>
 
 
 ### res.ajax
 
-res.ajax 就是[SuperAgent][SuperAgent]模块。
+res.ajax is [SuperAgent][SuperAgent].
 
 
 ### res.resource.action
 
-用法:
+Usage:
 
     res.resource.action({
         // some data
@@ -62,7 +62,7 @@ res.ajax 就是[SuperAgent][SuperAgent]模块。
         // error
     })
 
-例如调用Hello的API:
+Example, call Hello API:
 
     // Hello World
     res.hello.get({
@@ -76,19 +76,19 @@ res.ajax 就是[SuperAgent][SuperAgent]模块。
 
 ### res.xxxToken
 
-    // 清除浏览器 localStorage 中的 auth token
+    // clear token saved in localStorage
     res.clearToken()
-    // 获取浏览器 localStorage 中的 auth token
+    // get token saved in localStorage
     var token = res.getToken()
-    // 设置浏览器 localStorage 中的 auth token
+    // set token saved in localStorage
     res.setToken(token)
 
 
 ### res.config
 
-    //设置请求 url 前缀，可以用来指定请求的服务器
+    //set url prefix, used for specify backend server
     res.config.urlPrefix = 'http://127.0.0.1:5000'
-    //设置 auth 请求头，注意要是小写字母
+    //set auth header, note that use lowercase letters
     res.config.authHeader = 'authorization'
 
 
