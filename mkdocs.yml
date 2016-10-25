@@ -4,4 +4,8 @@ pages:
   - Quickstart: quickstart.md
   - resjs: resjs.md
   - Schema: schema.md
+  - API: api.autodoc
+theme: yeti
+extra_css:
+    - css/extra.css
 repo_url: 'https://github.com/guyskk/flask-restaction'
