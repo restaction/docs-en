@@ -103,5 +103,5 @@ flask-restaction VS flask-restful:
 
 **2016年10月**
 :   重构权限功能, 独立出TokenAuth, 增加灵活性和可拓展性.  
-    Validater更名为Validr.
-    文档从Sphinx迁移到MKDocs，并完成出英文文档
+    Validater更名为Validr.  
+    文档从Sphinx迁移到MKDocs，并完成出英文文档.  
