@@ -1,3 +1,3 @@
 mkdocs-bootswatch
-git+https://github.com/restaction/mkdocs-autodoc.git
-git+https://github.com/guyskk/flask-restaction.git@mkdocs
+https://github.com/restaction/mkdocs-autodoc/archive/master.tar.gz
+https://github.com/guyskk/flask-restaction/archive/mkdocs.tar.gz
