@@ -4,7 +4,8 @@ res.js is a AJAX lib used for call API in a easy way.
 
 ## Generate res.js
 
-Use cli provided by flask-restaction or https://www.npmjs.com/package/resjs
+Use cli provided by flask-restaction or
+[https://www.npmjs.com/package/resjs](https://www.npmjs.com/package/resjs)
 can generate res.js, they has the same usage and generate the same code.
 
 Usage:

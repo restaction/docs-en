@@ -13,11 +13,6 @@ Note: Only support Python3.3+
 
     pip install flask-restaction
 
-## Examples
-
-[https://github.com/guyskk/flask-restaction/examples](https://github.com/guyskk/flask-restaction/examples)
-
-
 ## Compare
 
 ### flask-restful

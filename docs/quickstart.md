@@ -117,15 +117,27 @@ If response data validation fail, then response is:
 
 Schema is [YAML](https://zh.wikipedia.org/wiki/YAML) text, see [Schema](schema.md).
 
-#### Custom validator
+### Custom validator
 
 Validr's document had describe custom validator, see [Validr](https://github.com/guyskk/validr).
 
 All custom validators is registered via `Api(validators=validators)`.
 
+
+## Add resource
+
+Use `Api.add_resource` to add resource, params of `add_resource` will
+be passed to resource's `__init__` method.
+
+URL is the same as resource name, if you want to use another URL, you can
+create a new resource like this:
+
+    api.add_resource(type('NewName', (MyResource,), {}))
+
+
 ## URL rules
 
-use `url_for(endpoint)`` of flask to build url for action.
+use `url_for(endpoint)` of flask to build url for action.
 
 endpoint is `resource@action_name`
 
@@ -347,17 +359,6 @@ Here is the basic structure, see
             return rv, status, headers
 
 
-## Add resource
-
-Use `Api.add_resource` to add resource, params of `add_resource` will
-be passed to resource's `__init__` method.
-
-URL is the same as resource name, if you want to use another URL, you can
-create a new resource like this:
-
-    api.add_resource(type('NewName', (MyResource,), {}))
-
-
 ## API document
 
 ![Screenshot](img/docs.png)
@@ -456,7 +457,8 @@ See [resjs](resjs.md) for more infomation.
 
 ## res.py
 
-res.py's usage is similar as res.js, it use requests for sending HTTP requests.
+res.py's usage is similar as res.js, it use
+[Requests](https://github.com/kennethreitz/requests) for sending HTTP requests.
 
     >>> from flask_restaction import Res
     >>> help(Res)
