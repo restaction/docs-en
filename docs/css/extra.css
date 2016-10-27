@@ -29,3 +29,8 @@ div.warning, div.caution {
 div.danger, div.error, div.important {
     border-left: 5px solid #000;
 }
+
+.rst-versions.rst-badge {
+    /*hide readthedocs versions-badge*/
+    display: none !important;
+}
