@@ -6,6 +6,7 @@ pages:
   - resjs: resjs.md
   - Document: document.md
   - API: api.autodoc
+  - Language: language.md
 theme: yeti
 extra_css:
   - css/extra.css
