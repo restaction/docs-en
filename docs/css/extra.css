@@ -34,3 +34,20 @@ div.danger, div.error, div.important {
     /*hide readthedocs versions-badge*/
     display: none !important;
 }
+
+
+/*custom navbar color*/
+
+.navbar-default {
+    background-color: #00897b;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    color: #fff;
+    background-color: #007062;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: #fff;
+    background-color: #007062;
+}
