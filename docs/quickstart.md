@@ -180,6 +180,10 @@ The response data will be serialized to appropriate format.
 
 ## Permission control
 
+The authorization implement is for convenient in many projects which
+didn't need too flex permission system. You can use flask-login and others,
+they works well with flask-restaction.
+
 ### Let's begin with a example
 
 meta.json, config roles
