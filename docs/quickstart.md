@@ -450,7 +450,8 @@ value in request headers.
 
 You can use res.js via open browser console in API document page.
 
-If API's url prefix isn't '/', then you need config **API_URL_PREFIX**.
+If API's url prefix isn't '/', then you need config **API_URL_PREFIX**,
+for generating correct url in document and res.js.
 
 Example: `http://127.0.0.1:5000/api`
 
